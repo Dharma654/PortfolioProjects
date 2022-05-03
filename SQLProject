@@ -1,64 +1,156 @@
 # Pulling data through Pandas:
 
 
-
 import pandas as pd
 
-
 data = pd.read_csv("movies.csv")
-
 
 # print(type(data["rating"]))
 
 # # Checking through all the data where Rating = R
+
 data_rating = data[data["rating"] == "R"]
 print(data_rating)
 
-
 # # Checking the nos. of R Rating
+
 data_budget_count = len(data[data["rating"] == "R"])
 print(data_budget_count)
 #
 #
 # # Checking max budget from the whole data
+
 budget_data = data[data["budget"] == data.budget.max()]
 
 
 # # Getting the max runtime from all of the movies:
+
 print(data[data.runtime == data.runtime.max()])
 
 
 # # getting the min runtime from all of the movies:
-print(data[data.runtime == data.runtime.min()])
 
+print(data[data.runtime == data.runtime.min()])
 
 #############################################
 drama_genre = data[data["genre"] == "Drama"]
 print(drama_genre)
 
 # # Getting the movies of year 2005
+
 yr_count = data[data["year"] == "2005"]
 print(yr_count)
 
 
 # Getting the whole list of countries:
+
 print(data['country'])
 
 
 # Getting all the name of the movies from line 16 - 24  and their year of release :
+
 print(data.loc['Dressed to Kill' : 'The Final Countdown', 'year'])
 
 # anotherway of doing the same thing :
+
 print(data.iloc[14:23,[3,4]])
 
 
 #  Now lets say we dont want to see a particular column in this case, director & writer as in visualizing the data where the data will be immutable:
+
 data.drop(['director', 'writer'] , axis=1)
 
 
 # Lets say we want to see only first 15 rows of data:
+
 print(data.head(15))
 
 # Same works with if we want to see  last 10 rows of data:
+
 print(data.tail(10))
 
+
+##PULLING DATA THROUGH MYSQL##
+
+
+# Looking for all the movies along with the year released & writer only from the data where we want to visualize this data with this proper given name:
+
+SELECT name AS 'Movie Name', year AS 'Relased Year', writer AS 'Author'FROM movies; 
+
+
+# Looking for the movie name "Just Tell Me What You Want" out of thousands of entries :
+
+SELECT * FROM movies WHERE name='Just Tell Me What You Want';
+
+
+# Quering through the data where runtime is more than 120 mins amongst all of the movies :
+
+SELECT * FROM movies WHERE runtime=>120; 
+
+
+# Let's say we want to know all the types of Ratings from our Database :
+
+SELECT DISTINCT rating FROM movies;
+
+
+# We are looking for the companies from the database who actually made this movies by their individual following name :
+
+SELECT DISTINCT company FROM movies;
+
+ 
+ 
+ # Same as last one we are querying for all the writers wo wrote all this  movies individually :
+ 
+ SELECT DISTINCT writer FROM movies;
+ 
+ 
+ 
+ # One more distinction in case we want to know all the types of GENRE of this movies :
+ 
+ SELECT DISTINCT genre rating FROM movies;
+ 
+ 
+ 
+ # Last but not the least, If we want all the name of the directors of all the movies, Thankfully we are able to do this with the help of MYSQL :
+ 
+  SELECT DISTINCT director FROM movies;
+  
+  
+  
+  # In case we are looking for the recent released years of all the movies with their name ; 
+  
+  SELECT name, year FROM movies ORDER BY 2 DESC;
+  
+  
+  
+  # Lets say we are looking for the runtime of all the movies starting with the lowest runningtime :
+  
+   SELECT name, runtime FROM movies ORDER BY 2;
+   
+   
+   
+   # Even we can look for the highest budget among all the movies starting from high to low:
+   
+    SELECT name, budget FROM movies ORDER BY 2 DESC;
+	
+	
+	
+	# Suppose we are looking for the TOP 5 Highest Profit that made by the company :
+	
+	 SELECT name, gross FROM movies ORDER BY 2 DESC LIMIT 5;
+   
+   
+  
+  #Lets say someone is looking for a movie from our movie list but he cant remember the exact name of the movie :
+  
+  SELECT name FROM movies WHERE  name LIKE 'The';
+  
+  
+  
+  # If we are looking for total number of the author names from our database:
+  
+  SELECT COUNT(DISTINCT writer) FROM movies;
+  
+  
+  
+  # 
