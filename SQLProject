@@ -16,11 +16,6 @@ print(data_rating)
 
 data_budget_count = len(data[data["rating"] == "R"])
 print(data_budget_count)
-#
-#
-# # Checking max budget from the whole data
-
-budget_data = data[data["budget"] == data.budget.max()]
 
 
 # # Getting the max runtime from all of the movies:
