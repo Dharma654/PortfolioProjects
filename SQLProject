@@ -120,7 +120,7 @@ SELECT DISTINCT company FROM movies;
   # In case we are looking for the recent released years of all the movies with their name ; 
   
   SELECT name, year FROM movies ORDER BY 2 DESC;
-  
+  SELECT MAX (year) FROM movies;
   
   
   # Lets say we are looking for the runtime of all the movies starting with the lowest runningtime :
@@ -138,6 +138,7 @@ SELECT DISTINCT company FROM movies;
 	# Suppose we are looking for the TOP 5 Highest Profit that made by the company :
 	
 	 SELECT name, gross FROM movies ORDER BY 2 DESC LIMIT 5;
+	 
    
    
   
@@ -153,4 +154,75 @@ SELECT DISTINCT company FROM movies;
   
   
   
-  # 
+  # Lets see even we are looking for the total numbers of movies made by each company:
+  
+  SELECT company, COUNT (*) FROM movies GROUP BY company;
+  
+  
+  
+  # We are looking at the latest & oldest Year of Release from the Movies List :
+  
+  SELECT MAX (year) FROM movies;
+  SELECT MIN (year) FROM movies;
+  
+  
+  
+  # Another way of finding highest 7 lowest budget :
+  
+  SELECT * FROM movies 
+WHERE budget = (SELECT Min(budget) 
+                FROM movies); 
+  
+  SELECT * FROM movies 
+WHERE budget = (SELECT MIM (budget) FROM movies); 
+  
+  
+  
+  # Lets say we are looking for the list of movies where the released year is more than or same 2000
+  
+  SELECT name, year FROM movies 
+WHERE year >= 2000 ORDER BY year;
+
+
+
+# Lets say in another case we are looking the runtime where it is more than 100 mins
+
+SELECT name, runtime FROM movies 
+WHERE runtime >= 100 ORDER BY runtime;
+
+
+
+# Lets say we are looking for the movies which have the budget of less than 5000000.0 :
+
+SELECT name, budget FROM movies 
+WHERE budget >= 5000000.0 ORDER BY budget;
+
+
+
+# Querying through multiple queries at a time using AND operator :
+
+SELECT  
+    name, 
+    company, 
+	year FROM movies
+WHERE company='Paramount Pictures' 
+    AND year > 1990;
+
+SELECT  
+    name, 
+    company, 
+	year FROM movies
+WHERE company='Paramount Pictures' 
+    AND BETWEEN 2004 AND 2015;
+
+
+
+# Show casing CASE Statement :
+
+SELECT name, year,
+       CASE 
+         WHEN year >= 2000 THEN 'Modern Lit'
+         ELSE '20th Century Lit'
+       END AS GENRE
+FROM movies;
+
