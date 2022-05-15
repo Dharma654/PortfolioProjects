@@ -1,69 +1,3 @@
-# Pulling data through Pandas:
-
-
-import pandas as pd
-
-data = pd.read_csv("movies.csv")
-
-# print(type(data["rating"]))
-
-# # Checking through all the data where Rating = R
-
-data_rating = data[data["rating"] == "R"]
-print(data_rating)
-
-# # Checking the nos. of R Rating
-
-data_budget_count = len(data[data["rating"] == "R"])
-print(data_budget_count)
-
-
-# # Getting the max runtime from all of the movies:
-
-print(data[data.runtime == data.runtime.max()])
-
-
-# # getting the min runtime from all of the movies:
-
-print(data[data.runtime == data.runtime.min()])
-
-#############################################
-drama_genre = data[data["genre"] == "Drama"]
-print(drama_genre)
-
-# # Getting the movies of year 2005
-
-yr_count = data[data["year"] == "2005"]
-print(yr_count)
-
-
-# Getting the whole list of countries:
-
-print(data['country'])
-
-
-# Getting all the name of the movies from line 16 - 24  and their year of release :
-
-print(data.loc['Dressed to Kill' : 'The Final Countdown', 'year'])
-
-# anotherway of doing the same thing :
-
-print(data.iloc[14:23,[3,4]])
-
-
-#  Now lets say we dont want to see a particular column in this case, director & writer as in visualizing the data where the data will be immutable:
-
-data.drop(['director', 'writer'] , axis=1)
-
-
-# Lets say we want to see only first 15 rows of data:
-
-print(data.head(15))
-
-# Same works with if we want to see  last 10 rows of data:
-
-print(data.tail(10))
-
 
 ##PULLING DATA THROUGH MYSQL##
 
@@ -221,3 +155,71 @@ SELECT name, year,
        END AS GENRE
 FROM movies;
 
+
+
+
+# Pulling data through Pandas:
+
+
+import pandas as pd
+
+data = pd.read_csv("movies.csv")
+
+# print(type(data["rating"]))
+
+# # Checking through all the data where Rating = R
+
+data_rating = data[data["rating"] == "R"]
+print(data_rating)
+
+# # Checking the nos. of R Rating
+
+data_budget_count = len(data[data["rating"] == "R"])
+print(data_budget_count)
+
+
+# # Getting the max runtime from all of the movies:
+
+print(data[data.runtime == data.runtime.max()])
+
+
+# # getting the min runtime from all of the movies:
+
+print(data[data.runtime == data.runtime.min()])
+
+#############################################
+drama_genre = data[data["genre"] == "Drama"]
+print(drama_genre)
+
+# # Getting the movies of year 2005
+
+yr_count = data[data["year"] == "2005"]
+print(yr_count)
+
+
+# Getting the whole list of countries:
+
+print(data['country'])
+
+
+# Getting all the name of the movies from line 16 - 24  and their year of release :
+
+print(data.loc['Dressed to Kill' : 'The Final Countdown', 'year'])
+
+# anotherway of doing the same thing :
+
+print(data.iloc[14:23,[3,4]])
+
+
+#  Now lets say we dont want to see a particular column in this case, director & writer as in visualizing the data where the data will be immutable:
+
+data.drop(['director', 'writer'] , axis=1)
+
+
+# Lets say we want to see only first 15 rows of data:
+
+print(data.head(15))
+
+# Same works with if we want to see  last 10 rows of data:
+
+print(data.tail(10))
